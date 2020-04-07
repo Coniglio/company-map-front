@@ -14,7 +14,8 @@ export default {
   name: 'along',
   data: () => {
     return {
-      alongArray: null
+      alongArray: null,
+      selected: null
     }
   },
   mounted() {
@@ -22,10 +23,14 @@ export default {
       .get( "http://localhost:38081/api/v1/alongs" )
       .then( response => {
         this.alongArray = response.data
+
+        // チェックボックスの初期状態を生成
+        this.selected = Array.apply(null, Array(this.alongArray.length)).map(function () {return true})
       } )
     },
     methods: {
-      filter: function () {
+      filter: function (event) {
+        this.$emit('change', event.target.value)
       }
     }
 }

@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div id="filters">
-      <languages />
-      <alongs />
+      <languages @change="onChangeLanguages" />
+      <alongs @change="onChangeAlongs" />
     </div>
 
     <GmapMap
@@ -10,19 +10,32 @@
         lat:35.681236,
         lng:139.767125
       }"
-      :zoom="12"
+      :zoom="13"
       :options="{
         streetViewControl: false
       }"
       map-type-id="terrain"
       style="height:100vh;width:100vw;position: relative;z-index: 0;"
     >
-      <GmapMarker
-        :key="index"
+      <GmapInfoWindow
+        :options="infoOptions"
+        :position="infoWindowPos"
+        :opened="infoWinOpen"
+        @closeclick="infoWinOpen=false"
+      >
+        {{companyName}}
+      </GmapInfoWindow>
+      <div
         v-for="(m, index) in markers"
+        :key="index"
+      >
+      <GmapMarker
+        v-if="m.visible"
         :position="m.position"
         :clickable="true"
+        @click="toggleInfoWindow(m)"
       />
+      </div>
     </GmapMap>
   </div>
 </template>
@@ -34,14 +47,23 @@ import Alongs from './components/Along'
 import axios from 'axios'
 
 export default {
-  name: "HelloWorld",
+  name: "app",
   components: {
     Languages,
     Alongs
   },
   data() {
     return {
-      markers: []
+      markers: [],
+      infoOptions: {
+        pixelOffset: {
+          width: 0,
+          height: -35
+        }
+      },
+      infoWindowPos: null,
+      infoWinOpen: false,
+      companyName: null,
     };
   },
   created() {
@@ -54,12 +76,24 @@ export default {
               lat: company.latlng.lat,
               lng: company.latlng.lang
             },
-            name: company.name
+            name: company.name,
+            visible: true
           });
         }
     })
   },
   methods: {
+    toggleInfoWindow (marker) {
+      this.companyName = marker.name
+      this.infoWindowPos = marker.position
+      this.infoWinOpen = true
+    },
+    onChangeLanguages(languageId) {
+      console.log(languageId);
+    },
+    onChangeAlongs(alongId) {
+      console.log(alongId);
+    }
   }
 };
 </script>
