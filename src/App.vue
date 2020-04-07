@@ -88,11 +88,11 @@ export default {
       this.infoWindowPos = marker.position
       this.infoWinOpen = true
     },
-    onChangeLanguages(languageId) {
-      console.log(languageId);
+    onChangeLanguages(languageId, isChecked) {
+      console.log(languageId, isChecked);
     },
-    onChangeAlongs(alongId) {
-      console.log(alongId);
+    onChangeAlongs(alongId, isChecked) {
+      console.log(alongId, isChecked);
     }
   }
 };

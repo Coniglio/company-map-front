@@ -30,7 +30,7 @@ export default {
     },
     methods: {
       filter: function (event) {
-        this.$emit('change', event.target.value)
+        this.$emit('change', event.target.value, event.target.checked)
       }
     }
 }
