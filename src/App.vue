@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div id="filters">
-      <languages @change="onChangeLanguages" />
-      <alongs @change="onChangeAlongs" />
+      <languages @input="onInputLanguages" />
+      <alongs @input="onInputAlongs" />
     </div>
 
     <GmapMap
@@ -71,7 +71,6 @@ export default {
       .get( "http://localhost:38081/api/v1/companymaps" )
       .then( response => {
         for ( let company of response.data ) {
-          console.log(company)
           this.markers.push({
             position: {
               lat: company.latlng.lat,
@@ -91,10 +90,17 @@ export default {
       this.infoWindowPos = marker.position
       this.infoWinOpen = true
     },
-    onChangeLanguages(languageId, isChecked) {
+    onInputLanguages(languageId, isChecked) {
       console.log(languageId, isChecked);
+      for ( let marker of this.markers) {
+        for ( let language of marker.languages) {
+          if (languageId === language.id) {
+            marker.visible = isChecked
+          }
+        }
+      }
     },
-    onChangeAlongs(alongId, isChecked) {
+    onInputAlongs(alongId, isChecked) {
       console.log(alongId, isChecked);
     }
   }
