@@ -71,13 +71,16 @@ export default {
       .get( "http://localhost:38081/api/v1/companymaps" )
       .then( response => {
         for ( let company of response.data ) {
+          console.log(company)
           this.markers.push({
             position: {
               lat: company.latlng.lat,
               lng: company.latlng.lang
             },
             name: company.name,
-            visible: true
+            visible: true,
+            languages: company.languages,
+            alongs: company.alongs
           });
         }
     })
