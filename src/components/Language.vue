@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="language" v-for="(language, i) in languageArray" :key="language.id" @input="filter">
-    <input type="checkbox" checked="checked" :value="language.id" v-model="selected[i]">
+    <input type="checkbox" checked="checked" :value="language.id" v-model="checked[i]">
     <label>{{ language.name }}</label>
   </div>
 </div>
@@ -15,7 +15,8 @@ export default {
   data: () => {
     return {
       languageArray: null,
-      selected: null
+      checked: null,
+      checkedArray: []
     }
   },
   mounted() {
@@ -25,12 +26,18 @@ export default {
         this.languageArray = response.data
 
         // チェックボックスの初期状態を生成
-        this.selected = Array.apply(null, Array(this.languageArray.length)).map(function () {return true})
+        this.checked = Array.apply(null, Array(this.languageArray.length)).map(function () {return true})
       } )
   },
   methods: {
     filter: function (event) {
-      this.$emit('input', Number(event.target.value), event.target.checked)
+      // 言語IDとチェック状態のマップを生成
+      // TODO 仮実装
+      this.checkedArray = []
+      for (const [index, language] of this.languageArray.entries()) {
+        this.checkedArray.push({id: language.id, isChecked: this.checked[index]})
+      }
+      this.$emit('input', Number(event.target.value), event.target.checked, this.checkedArray)
     },
   }
 }

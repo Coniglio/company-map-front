@@ -90,13 +90,22 @@ export default {
       this.infoWindowPos = marker.position
       this.infoWinOpen = true
     },
-    onInputLanguages(languageId, isChecked) {
-      console.log(languageId, isChecked);
+    onInputLanguages(languageId, isChecked, checkedArray) {
       for ( let marker of this.markers) {
-        for ( let language of marker.languages) {
-          if (languageId === language.id) {
-            marker.visible = isChecked
+        marker.visible = false
+        let isVisible = false
+        lang: for ( let language of marker.languages) {
+          for (let checked of checkedArray) {
+            if (checked.id === language.id && checked.isChecked) {
+              console.log(marker.name, language.id, checked.id, checked.isChecked)
+              isVisible = true
+              break lang
+            }
           }
+        }
+
+        if (isVisible) {
+          marker.visible = true;
         }
       }
     },
