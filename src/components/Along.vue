@@ -15,7 +15,8 @@ export default {
   data: () => {
     return {
       alongArray: null,
-      selected: null
+      checked: null,
+      checkedArray: []
     }
   },
   mounted() {
@@ -25,12 +26,17 @@ export default {
         this.alongArray = response.data
 
         // チェックボックスの初期状態を生成
-        this.selected = Array.apply(null, Array(this.alongArray.length)).map(function () {return true})
+        this.checked = Array.apply(null, Array(this.alongArray.length)).map(function () {return false})
       } )
     },
     methods: {
       filter: function (event) {
-        this.$emit('input', Number(event.target.value), event.target.checked)
+        // TODO 仮実装
+        this.checkedArray = []
+        for (const [index, along] of this.alongArray.entries()) {
+          this.checkedArray.push({id: along.id, isChecked: this.checked[index]})
+        }
+        this.$emit('input', Number(event.target.value), event.target.checked, this.checkedArray)
       }
     }
 }
