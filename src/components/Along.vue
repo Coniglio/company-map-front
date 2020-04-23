@@ -1,7 +1,7 @@
 <template>
 <div>
-  <div class="along" v-for="along of alongArray" :key="along.id" @input="filter">
-    <input type="checkbox" checked="checked" :value="along.id">
+  <div class="along" v-for="(along, i) in alongArray" :key="along.id" @input="filter">
+    <input type="checkbox" checked="checked" :value="along.id" v-model="checked[i]">
     <label>{{ along.name }}</label>
   </div>
 </div>
