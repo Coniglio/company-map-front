@@ -26,7 +26,7 @@ export default {
         this.alongArray = response.data
 
         // チェックボックスの初期状態を生成
-        this.checked = Array.apply(null, Array(this.alongArray.length)).map(function () {return false})
+        this.checked = Array.apply(null, Array(this.alongArray.length)).map(function () {return true})
       } )
     },
     methods: {
