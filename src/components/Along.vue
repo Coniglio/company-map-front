@@ -30,12 +30,16 @@ export default {
       } )
     },
     methods: {
+      /**
+       * 言語IDとチェック状態のマップを生成
+       */
       filter: function (event) {
         // TODO 仮実装
         this.checkedArray = []
         for (const [index, along] of this.alongArray.entries()) {
           this.checkedArray.push({id: along.id, isChecked: this.checked[index]})
         }
+        //console.log(this.checkedArray);
         this.$emit('input', Number(event.target.value), event.target.checked, this.checkedArray)
       }
     }

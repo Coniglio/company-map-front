@@ -30,6 +30,9 @@ export default {
       } )
   },
   methods: {
+    /**
+     * 言語IDとチェック状態のマップを生成
+     */
     filter: function (event) {
       // 言語IDとチェック状態のマップを生成
       // TODO 仮実装
