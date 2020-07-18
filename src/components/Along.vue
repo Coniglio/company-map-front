@@ -34,13 +34,24 @@ export default {
        * 言語IDとチェック状態のマップを生成
        */
       filter: function (event) {
-        // TODO 仮実装
-        this.checkedArray = []
+        this.checkedArray = [] // チェクボックスを作り替えるけど、対象だけ書き換えた方がよいかも
+        // 手動でチェック状態の反映が必要。チェックボックスとデータが同期していない。作りの問題な気がする
+        const alongId = Number(event.target.value)
+        const isChecked = event.target.checked
+
+        // 言語
         for (const [index, along] of this.alongArray.entries()) {
-          this.checkedArray.push({id: along.id, isChecked: this.checked[index]})
+          
+          // 言語チェックボックス
+          if (along.id === alongId) {
+            this.checkedArray.push({id: along.id, isChecked: isChecked})
+          } else {
+            this.checkedArray.push({id: along.id, isChecked: this.checked[index]})
+          }
         }
-        //console.log(this.checkedArray);
-        this.$emit('input', Number(event.target.value), event.target.checked, this.checkedArray)
+
+        // 親コンポーネントに入力イベント通知
+        this.$emit('input', alongId, isChecked, this.checkedArray)
       }
     }
 }
