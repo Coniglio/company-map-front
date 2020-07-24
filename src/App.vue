@@ -1,8 +1,8 @@
 <template>
   <div id="app">
     <div id="filters">
-      <languages @input="onInputLanguages" />
-      <alongs @input="onInputAlongs" />
+      <languages :checkedLanguagesArray="checkedArray" @input="displayMarkers" />
+      <alongs :checkedAlongsArray="checkedArray" @input="displayMarkers" />
     </div>
 
     <GmapMap
@@ -85,33 +85,24 @@ export default {
     })
   },
   methods: {
-    toggleInfoWindow (marker) {
+    toggleInfoWindow(marker) {
       this.companyName = marker.name
       this.infoWindowPos = marker.position
       this.infoWinOpen = true
     },
     /**
-     * 言語の選択状態に応じたマーカーをマップ上に表示します
+     * 選択状態に応じたマーカーをマップ上に表示します
      * 
-     * @param languageId チェックした言語のID
-     * @param isChecked チェックした言語チェックボックスのチェック状態
-     * @param checkedArray 全言語チェックボックスのチェック状態
      */
-    onInputLanguages(languageId, isChecked, checkedArray) {
-      /**
-       * 1.企業マーカーでループ
-       * 2.言語でループ
-       * 3.チェック状態を反映
-       *  単一の言語のチェック状態だけを反映すると、PHPはオフでもGoはオンなので表示が必要なケースがある
-       */
-      // 企業
+    displayMarkers() {
       for ( let marker of this.markers) {
         marker.visible = false
 
         // 企業が採用している言語
         lang: for ( let language of marker.languages) {
+
           // 言語チェックボックス
-          for (let checked of checkedArray) {
+          for (let checked of this.$store.state.checkedLanguages) {
             // チェックした言語のIDと企業言語IDが一致 & チェックオン
             if (checked.id === language.id && checked.isChecked) {
               marker.visible = true
@@ -119,31 +110,21 @@ export default {
             }
           }
         }
-      }
-    },
-    /**
-     * 
-     * @param alongId チェックした沿線のID
-     * @param isChecked チェックした沿線チェックボックスのチェック状態
-     * @param checkedArray 全沿線チェックボックスのチェック状態
-     */
-    onInputAlongs(alongId, isChecked, checkedArray) {
-      for ( let marker of this.markers) {
-        marker.visible = false
 
-        // 企業最寄りの沿線
-        lang: for ( let along of marker.alongs) {
-          // 沿線チェックボックス
-          for (let checked of checkedArray) {
-            // チェックした沿線のIDと企業の沿線IDが一致 & チェックオン
+        // 企業が最寄りの沿線
+        along: for ( let along of marker.alongs) {
+
+          // 言語チェックボックス
+          for (let checked of this.$store.state.checkedAlongs) {
+            // チェックした言語のIDと企業言語IDが一致 & チェックオン
             if (checked.id === along.id && checked.isChecked) {
               marker.visible = true
-              break lang
+              break along
             }
           }
         }
       }
-    }
+    },
   }
 };
 </script>

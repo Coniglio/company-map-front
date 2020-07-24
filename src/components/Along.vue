@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="along" v-for="(along, i) in alongArray" :key="along.id" @input="filter">
+  <div class="along" v-for="(along, i) in alongArray" :key="along.id" @click="filter">
     <input type="checkbox" checked="checked" :value="along.id" v-model="checked[i]">
     <label>{{ along.name }}</label>
   </div>
@@ -16,7 +16,6 @@ export default {
     return {
       alongArray: null,
       checked: null,
-      checkedArray: []
     }
   },
   mounted() {
@@ -50,8 +49,10 @@ export default {
           }
         }
 
+        this.$store.state.checkedAlongs = this.checkedArray
+
         // 親コンポーネントに入力イベント通知
-        this.$emit('input', alongId, isChecked, this.checkedArray)
+        this.$emit('input')
       }
     }
 }

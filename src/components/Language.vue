@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div class="language" v-for="(language, i) in languageArray" :key="language.id" @input="filter">
+  <div class="language" v-for="(language, i) in languageArray" :key="language.id" @click="filter">
     <input type="checkbox" checked="checked" :value="language.id" v-model="checked[i]">
     <label>{{ language.name }}</label>
   </div>
@@ -14,9 +14,8 @@ export default {
   name: 'language',
   data: () => {
     return {
-      languageArray: null,
-      checked: null,
-      checkedArray: []
+      languageArray: [],
+      checked: [],
     }
   },
   mounted() {
@@ -52,8 +51,10 @@ export default {
         }
       }
 
+      this.$store.state.checkedLanguages = this.checkedArray
+
       // 親コンポーネントに入力イベント通知
-      this.$emit('input', languageId, isChecked, this.checkedArray)
+      this.$emit('input')
     },
   }
 }
