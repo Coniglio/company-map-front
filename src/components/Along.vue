@@ -25,7 +25,11 @@ export default {
         this.alongArray = response.data
 
         // チェックボックスの初期状態を生成
-        this.checked = Array.apply(null, Array(this.alongArray.length)).map(function () {return true})
+        this.checked = Array.apply(null, Array(this.alongArray.length)).map(function () {return false})
+
+        for (const [index, along] of this.alongArray.entries()) {
+          this.$store.state.checkedAlongs.push({id: along.id, isChecked: this.checked[index]})
+        }
       } )
     },
     methods: {
