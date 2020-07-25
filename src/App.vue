@@ -1,6 +1,6 @@
 <template>
   <v-app id="app">
-    <v-app-bar fixed=true>
+    <v-app-bar fixed=true class="light-blue lighten-3">
       <v-img width="20px" height="10px" src="https://cdn.worldvectorlogo.com/logos/vuetify.svg"></v-img>
       <v-col class="text-left">test</v-col>
 
