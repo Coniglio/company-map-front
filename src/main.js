@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import App from './App.vue'
 import * as VueGoogleMaps from 'vue2-google-maps'
+import vuetify from './plugins/vuetify';
 
 Vue.use(VueGoogleMaps, {
   load: {
@@ -26,4 +27,5 @@ const store = new Vuex.Store({
 new Vue({
   render: h => h(App),
   store,
+  vuetify,
 }).$mount('#app')

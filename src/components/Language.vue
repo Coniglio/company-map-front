@@ -1,10 +1,10 @@
 <template>
-<div>
-  <div class="language" v-for="(language, i) in languageArray" :key="language.id" @click="filter">
-    <input type="checkbox" checked="checked" :value="language.id" v-model="checked[i]">
-    <label>{{ language.name }}</label>
-  </div>
-</div>
+  <v-list>
+    <v-list-item v-for="(language, i) in languageArray" :key="language.id" @click="filter">
+      <input type="checkbox" checked="checked" :value="language.id" v-model="checked[i]">
+      <v-list-item-title>{{ language.name }}</v-list-item-title>
+    </v-list-item>
+  </v-list>
 </template>
 
 <script>

@@ -1,8 +1,48 @@
 <template>
-  <div id="app">
+  <v-app id="app">
     <div id="filters">
-      <languages :checkedLanguagesArray="checkedArray" @input="displayMarkers" />
       <alongs :checkedAlongsArray="checkedArray" @input="displayMarkers" />
+      
+      <v-menu offset-y>
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on">言語</v-btn>
+        </template>
+        <languages :checkedLanguagesArray="checkedArray" @input="displayMarkers" />
+      </v-menu>
+
+      <v-menu offset-y>
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on">沿線</v-btn>
+        </template>
+        <v-list>
+          <v-list-item>
+            <v-list-item-title>test</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+
+      <v-menu offset-y>
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on">福利厚生</v-btn>
+        </template>
+        <v-list>
+          <v-list-item>
+            <v-list-item-title>test</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+
+      <v-menu offset-y>
+        <template v-slot:activator="{ on }">
+          <v-btn v-on="on">年収</v-btn>
+        </template>
+        <v-list>
+          <v-list-item>
+            <v-list-item-title>test</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+      
     </div>
 
     <GmapMap
@@ -37,7 +77,7 @@
       />
       </div>
     </GmapMap>
-  </div>
+  </v-app>
 </template>
 
 <script>
