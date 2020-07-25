@@ -1,10 +1,10 @@
 <template>
-<div>
-  <div class="along" v-for="(along, i) in alongArray" :key="along.id" @click="filter">
-    <input type="checkbox" checked="checked" :value="along.id" v-model="checked[i]">
-    <label>{{ along.name }}</label>
-  </div>
-</div>
+  <v-list>
+    <v-list-item v-for="(along, i) in alongArray" :key="along.id" @click="filter">
+      <input type="checkbox" checked="checked" :value="along.id" v-model="checked[i]">
+      <v-list-item-title>{{ along.name }}</v-list-item-title>
+    </v-list-item>
+  </v-list>
 </template>
 
 <script>

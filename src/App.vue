@@ -1,8 +1,6 @@
 <template>
   <v-app id="app">
     <div id="filters">
-      <alongs :checkedAlongsArray="checkedArray" @input="displayMarkers" />
-      
       <v-menu offset-y>
         <template v-slot:activator="{ on }">
           <v-btn v-on="on">言語</v-btn>
@@ -14,11 +12,7 @@
         <template v-slot:activator="{ on }">
           <v-btn v-on="on">沿線</v-btn>
         </template>
-        <v-list>
-          <v-list-item>
-            <v-list-item-title>test</v-list-item-title>
-          </v-list-item>
-        </v-list>
+        <alongs :checkedAlongsArray="checkedArray" @input="displayMarkers" />
       </v-menu>
 
       <v-menu offset-y>
