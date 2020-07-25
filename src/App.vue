@@ -1,21 +1,26 @@
 <template>
   <v-app id="app">
-    <div id="filters">
-      <v-menu offset-y>
+    <v-app-bar fixed=true>
+      <v-img width="20px" height="10px" src="https://cdn.worldvectorlogo.com/logos/vuetify.svg"></v-img>
+      <v-col class="text-left">test</v-col>
+
+      <v-spacer></v-spacer>
+  
+      <v-menu offset-y :close-on-content-click=false>
         <template v-slot:activator="{ on }">
           <v-btn v-on="on">言語</v-btn>
         </template>
         <languages :checkedLanguagesArray="checkedArray" @input="displayMarkers" />
       </v-menu>
 
-      <v-menu offset-y>
+      <v-menu offset-y :close-on-content-click=false>
         <template v-slot:activator="{ on }">
           <v-btn v-on="on">沿線</v-btn>
         </template>
         <alongs :checkedAlongsArray="checkedArray" @input="displayMarkers" />
       </v-menu>
 
-      <v-menu offset-y>
+      <v-menu offset-y :close-on-content-click=false>
         <template v-slot:activator="{ on }">
           <v-btn v-on="on">福利厚生</v-btn>
         </template>
@@ -26,7 +31,7 @@
         </v-list>
       </v-menu>
 
-      <v-menu offset-y>
+      <v-menu offset-y :close-on-content-click=false>
         <template v-slot:activator="{ on }">
           <v-btn v-on="on">年収</v-btn>
         </template>
@@ -36,41 +41,68 @@
           </v-list-item>
         </v-list>
       </v-menu>
-      
-    </div>
 
-    <GmapMap
-      :center="{
-        lat:35.681236,
-        lng:139.767125
-      }"
-      :zoom="13"
-      :options="{
-        streetViewControl: false
-      }"
-      map-type-id="terrain"
-      style="height:100vh;width:100vw;position: relative;z-index: 0;"
-    >
-      <GmapInfoWindow
-        :options="infoOptions"
-        :position="infoWindowPos"
-        :opened="infoWinOpen"
-        @closeclick="infoWinOpen=false"
+      <v-spacer></v-spacer>
+
+      <v-menu bottom left>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn
+            dark
+            icon
+            v-bind="attrs"
+            v-on="on"
+          >
+            <v-icon>mdi-dots-vertical</v-icon>
+          </v-btn>
+        </template>
+
+        <v-list>
+          <v-list-item>
+            <v-list-item-title>test</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
+    </v-app-bar>
+
+    <v-main>
+      <GmapMap
+        :center="{
+          lat:35.681236,
+          lng:139.767125
+        }"
+        :zoom="13"
+        :options="{
+          streetViewControl: false
+        }"
+        map-type-id="terrain"
+        style="height:96vh;width:100vw;position: relative;z-index: 0;"
       >
-        {{companyName}}
-      </GmapInfoWindow>
-      <div
-        v-for="(m, index) in markers"
-        :key="index"
-      >
-      <GmapMarker
-        v-if="m.visible"
-        :position="m.position"
-        :clickable="true"
-        @click="toggleInfoWindow(m)"
-      />
-      </div>
-    </GmapMap>
+        <GmapInfoWindow
+          :options="infoOptions"
+          :position="infoWindowPos"
+          :opened="infoWinOpen"
+          @closeclick="infoWinOpen=false"
+        >
+          {{companyName}}
+        </GmapInfoWindow>
+        <div
+          v-for="(m, index) in markers"
+          :key="index"
+        >
+        <GmapMarker
+          v-if="m.visible"
+          :position="m.position"
+          :clickable="true"
+          @click="toggleInfoWindow(m)"
+        />
+        </div>
+      </GmapMap>
+    </v-main>
+
+    <v-footer fabsolute :padless=true>
+      <v-col cols="12" class="text-right">&copy; {{ new Date().getFullYear() }}</v-col>
+    </v-footer>
+      
   </v-app>
 </template>
 
@@ -111,7 +143,7 @@ export default {
               lng: company.latlng.lang
             },
             name: company.name,
-            visible: true,
+            visible: false,
             languages: company.languages,
             alongs: company.alongs
           });
@@ -164,10 +196,7 @@ export default {
 </script>
 
 <style scoped>
-  #filters {
-    position: absolute;
-    left: 5px;
-    top: 5px;
-    z-index: 10;
+  v-footer {
+    height: 10px;
   }
 </style>
