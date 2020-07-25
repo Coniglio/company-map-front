@@ -65,8 +65,4 @@ export default {
 </script>
 
 <style scoped>
-.language {
-    display: inline-block;
-    background-color: #DF907C;
-}
 </style>

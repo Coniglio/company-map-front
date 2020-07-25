@@ -63,8 +63,4 @@ export default {
 </script>
 
 <style scoped>
-.along {
-    display: inline-block;
-    background-color: #ECD070;
-}
 </style>
