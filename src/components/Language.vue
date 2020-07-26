@@ -19,7 +19,7 @@ export default {
     }
   },
   mounted() {
-    const url = process.env.VUE_API_SERVER + "/api/v1/languages"
+    const url = process.env.VUE_APP_API_SERVER + "/api/v1/languages"
     axios
       .get(url)
       .then( response => {
