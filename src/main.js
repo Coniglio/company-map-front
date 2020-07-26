@@ -6,7 +6,7 @@ import vuetify from './plugins/vuetify';
 
 Vue.use(VueGoogleMaps, {
   load: {
-    key: this.process.env.VUE_APP_GOOGLE_MAPS_API_KEY,
+    key: process.env.VUE_APP_GOOGLE_MAPS_API_KEY,
     libraries: 'places',
     region: 'JP',
     language: 'ja'
