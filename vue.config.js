@@ -12,7 +12,10 @@ module.exports = {
     hot: true,
     disableHostCheck: true,
   },
-  outputDir: {
-    filename: '[name].[hash].js',
-  },
+  configureWebpack: {
+    output: {
+      filename: '[name].[hash].js',
+    },
+  }
+  
 }
