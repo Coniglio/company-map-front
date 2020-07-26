@@ -134,7 +134,7 @@ export default {
   },
   created() {
     axios
-      .get( process.env.API_SERVER + "/api/v1/companymaps" )
+      .get( string(process.env.API_SERVER) + "/api/v1/companymaps" )
       .then( response => {
         for ( let company of response.data ) {
           this.markers.push({
