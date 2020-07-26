@@ -20,7 +20,7 @@ export default {
   },
   mounted() {
     axios
-      .get( process.env.API_SERVER + "/api/v1/alongs" )
+      .get( this.process.env.API_SERVER + "/api/v1/alongs" )
       .then( response => {
         this.alongArray = response.data
 
