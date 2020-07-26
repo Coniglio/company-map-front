@@ -20,7 +20,7 @@ export default {
   },
   mounted() {
     axios
-      .get( string(process.env.API_SERVER) + "/api/v1/languages" )
+      .get( String(process.env.API_SERVER) + "/api/v1/languages" )
       .then( response => {
         this.languageArray = response.data
 
