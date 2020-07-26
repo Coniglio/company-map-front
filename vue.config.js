@@ -12,7 +12,7 @@ module.exports = {
     hot: true,
     disableHostCheck: true,
   },
-  output: {
+  outputDir: {
     filename: '[name].[hash].js',
   },
 }
