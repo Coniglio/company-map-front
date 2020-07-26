@@ -19,7 +19,7 @@ export default {
     }
   },
   mounted() {
-    const url = process.env.API_SERVER + "/api/v1/alongs"
+    const url = process.env.VUE_API_SERVER + "/api/v1/alongs"
     axios
       .get(url)
       .then( response => {

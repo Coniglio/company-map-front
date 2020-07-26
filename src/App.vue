@@ -133,7 +133,7 @@ export default {
     };
   },
   created() {
-    const url = process.env.API_SERVER + "/api/v1/companymaps"
+    const url = process.env.VUE_API_SERVER + "/api/v1/companymaps"
     axios
       .get(url)
       .then( response => {
