@@ -19,8 +19,9 @@ export default {
     }
   },
   mounted() {
+    const url = rocess.env.API_SERVER + "/api/v1/languages"
     axios
-      .get( String(process.env.API_SERVER) + "/api/v1/languages" )
+      .get(url
       .then( response => {
         this.languageArray = response.data
 

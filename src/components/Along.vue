@@ -19,8 +19,9 @@ export default {
     }
   },
   mounted() {
+    const url = rocess.env.API_SERVER + "/api/v1/alongs"
     axios
-      .get( String(process.env.API_SERVER) + "/api/v1/alongs" )
+      .get(url)
       .then( response => {
         this.alongArray = response.data
 

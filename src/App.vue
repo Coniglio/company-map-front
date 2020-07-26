@@ -133,8 +133,9 @@ export default {
     };
   },
   created() {
+    const url = process.env.API_SERVER + "/api/v1/companymaps"
     axios
-      .get( String(process.env.API_SERVER) + "/api/v1/companymaps" )
+      .get(url)
       .then( response => {
         for ( let company of response.data ) {
           this.markers.push({
