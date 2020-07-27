@@ -5,44 +5,6 @@
       <v-col class="text-left">test</v-col>
 
       <v-spacer></v-spacer>
-  
-      <v-menu offset-y :close-on-content-click=false>
-        <template v-slot:activator="{ on }">
-          <v-btn v-on="on">言語</v-btn>
-        </template>
-        <languages :checkedLanguagesArray="checkedArray" @input="displayMarkers" />
-      </v-menu>
-
-      <v-menu offset-y :close-on-content-click=false>
-        <template v-slot:activator="{ on }">
-          <v-btn v-on="on">沿線</v-btn>
-        </template>
-        <alongs :checkedAlongsArray="checkedArray" @input="displayMarkers" />
-      </v-menu>
-
-      <v-menu offset-y :close-on-content-click=false>
-        <template v-slot:activator="{ on }">
-          <v-btn v-on="on">福利厚生</v-btn>
-        </template>
-        <v-list>
-          <v-list-item>
-            <v-list-item-title>test</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-
-      <v-menu offset-y :close-on-content-click=false>
-        <template v-slot:activator="{ on }">
-          <v-btn v-on="on">年収</v-btn>
-        </template>
-        <v-list>
-          <v-list-item>
-            <v-list-item-title>test</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-
-      <v-spacer></v-spacer>
 
       <v-menu bottom left>
         <template v-slot:activator="{ on, attrs }">
@@ -54,7 +16,7 @@
           >
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
-        </template>
+        </template> 
 
         <v-list>
           <v-list-item>
@@ -62,6 +24,44 @@
           </v-list-item>
         </v-list>
       </v-menu>
+
+      <template v-slot:extension>
+        <v-menu offset-y :close-on-content-click=false>
+          <template v-slot:activator="{ on }">
+            <v-btn v-on="on">言語</v-btn>
+          </template>
+          <languages :checkedLanguagesArray="checkedArray" @input="displayMarkers" />
+        </v-menu>
+
+        <v-menu offset-y :close-on-content-click=false>
+          <template v-slot:activator="{ on }">
+            <v-btn v-on="on">沿線</v-btn>
+          </template>
+          <alongs :checkedAlongsArray="checkedArray" @input="displayMarkers" />
+        </v-menu>
+
+        <v-menu offset-y :close-on-content-click=false>
+          <template v-slot:activator="{ on }">
+            <v-btn v-on="on">福利厚生</v-btn>
+          </template>
+          <v-list>
+            <v-list-item>
+              <v-list-item-title>test</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+
+        <v-menu offset-y :close-on-content-click=false>
+          <template v-slot:activator="{ on }">
+            <v-btn v-on="on">年収</v-btn>
+          </template>
+          <v-list>
+            <v-list-item>
+              <v-list-item-title>test</v-list-item-title>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </template>
     </v-app-bar>
 
     <v-main>
