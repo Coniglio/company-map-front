@@ -44,11 +44,7 @@
           <template v-slot:activator="{ on }">
             <v-btn v-on="on">福利厚生</v-btn>
           </template>
-          <v-list>
-            <v-list-item>
-              <v-list-item-title>test</v-list-item-title>
-            </v-list-item>
-          </v-list>
+          <generousWelfare :checkedGenerousWelfareArray="checkedArray" @input="displayMarkers" />
         </v-menu>
 
         <v-menu offset-y :close-on-content-click=false>
@@ -109,6 +105,7 @@
 <script>
 import Languages from './components/Language'
 import Alongs from './components/Along'
+import GenerousWelfare from './components/GenerousWelfare'
 
 import axios from 'axios'
 
@@ -116,7 +113,8 @@ export default {
   name: "app",
   components: {
     Languages,
-    Alongs
+    Alongs,
+    GenerousWelfare
   },
   data() {
     return {
@@ -190,6 +188,8 @@ export default {
             }
           }
         }
+
+        // 企業の福利厚生
       }
     },
   }
