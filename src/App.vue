@@ -44,9 +44,7 @@
           <template v-slot:activator="{ on }">
             <v-btn v-on="on">福利厚生</v-btn>
           </template>
-          <v-card>
-            <generousWelfare :checkedGenerousWelfareArray="checkedArray" @input="displayMarkers" />
-          </v-card>
+          <generousWelfare :checkedGenerousWelfareArray="checkedArray" @input="displayMarkers" />
         </v-menu>
 
         <v-menu offset-y :close-on-content-click=false>

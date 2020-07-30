@@ -1,7 +1,7 @@
 <template>
   <v-list>
     <v-list-item v-for="(generousWelfare, i) in generousWelfareArray" :key="generousWelfare.id" @click="filter">
-      <input type="checkbox" checked="checked" :value="generousWelfare.id" v-model="checked[i]">
+      <v-checkbox @click="checked" :value="generousWelfare.id" v-model="checked[i]"></v-checkbox>
       <v-list-item-title>{{ generousWelfare.name }}</v-list-item-title>
     </v-list-item>
   </v-list>
