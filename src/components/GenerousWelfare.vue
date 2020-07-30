@@ -1,24 +1,22 @@
 <template>
   <v-list>
-    <v-list-item-group multiple>
-      <template v-for="(generousWelfare, i) in generousWelfareArray">
-        <v-list-item :key="generousWelfare.id" @click="filter">
-          <template v-slot:default="{ active, toggle }">
+    <v-list-item-group>
+        <v-list-item v-for="(generousWelfare, i) in generousWelfareArray" :key="generousWelfare.id" @click="filter">
+            <template v-slot:default="{ active, toggle }">
             <v-list-item-action @click="toggle">
-              <v-checkbox
+                <v-checkbox
                 :input-value="active"
-                :value="generousWelfare.id" 
+                :true-value="generousWelfare.id" 
                 v-model="checked[i]">
                 </v-checkbox>
-              </v-list-item-action>
+            </v-list-item-action>
 
-              <v-list-item-content>
+            <v-list-item-content>
                 <v-list-item-title>{{ generousWelfare.name }}</v-list-item-title>
-              </v-list-item-content>
+            </v-list-item-content>
             </template>
-          </v-list-item>
-        </template>
-      </v-list-item-group>
+        </v-list-item>
+    </v-list-item-group>
   </v-list>
 </template>
 
