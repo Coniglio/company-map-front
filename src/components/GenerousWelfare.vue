@@ -1,5 +1,5 @@
 <template>
-  <v-list shaped>
+  <v-list>
     <v-list-item-group>
       <template v-for="(generousWelfare, i) in generousWelfareArray"> 
         <v-divider :key="`divider-${i}`"></v-divider>
