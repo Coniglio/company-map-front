@@ -73,7 +73,7 @@
           streetViewControl: false
         }"
         map-type-id="terrain"
-        style="height:95vh;width:100vw;position: relative;z-index: 0;"
+        style="height:94vh;width:100vw;position: relative;z-index: 0;"
       >
         <GmapInfoWindow
           :options="infoOptions"
