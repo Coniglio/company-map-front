@@ -5,11 +5,12 @@
         <v-divider :key="`divider-${i}`"></v-divider>
         <v-list-item :key="`item-${i}`" :value="generousWelfare.id" @click="filter">
             <template v-slot:default="{ active, toggle }">
-            <v-list-item-action @click="toggle">
+            <v-list-item-action>
                 <v-checkbox
                 :input-value="active"
                 :true-value="generousWelfare.id" 
-                v-model="checked[i]">
+                v-model="checked[i]"
+                @click="toggle">
                 </v-checkbox>
             </v-list-item-action>
 
