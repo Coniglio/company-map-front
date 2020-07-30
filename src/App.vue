@@ -40,7 +40,7 @@
           <alongs :checkedAlongsArray="checkedArray" @input="displayMarkers" />
         </v-menu>
 
-        <v-menu offset-y :close-on-content-click=false>
+        <v-menu offset-y :close-on-content-click=false v-scroll:#scroll-target="onScroll">
           <template v-slot:activator="{ on }">
             <v-btn v-on="on">福利厚生</v-btn>
           </template>
