@@ -40,11 +40,13 @@
           <alongs :checkedAlongsArray="checkedArray" @input="displayMarkers" />
         </v-menu>
 
-        <v-menu offset-y :close-on-content-click=false v-scroll:#scroll-target="onScroll">
+        <v-menu offset-y :close-on-content-click=false>
           <template v-slot:activator="{ on }">
             <v-btn v-on="on">福利厚生</v-btn>
           </template>
-          <generousWelfare :checkedGenerousWelfareArray="checkedArray" @input="displayMarkers" />
+          <v-card>
+            <generousWelfare :checkedGenerousWelfareArray="checkedArray" @input="displayMarkers" />
+          </v-card>
         </v-menu>
 
         <v-menu offset-y :close-on-content-click=false>
