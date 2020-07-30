@@ -1,5 +1,5 @@
 <template>
-  <v-list>
+  <v-list shaped>
     <v-list-item-group>
         <v-list-item v-for="(generousWelfare, i) in generousWelfareArray" :key="generousWelfare.id" @click="filter">
             <template v-slot:default="{ active, toggle }">
@@ -12,7 +12,7 @@
             </v-list-item-action>
 
             <v-list-item-content>
-                <v-list-item-title>{{ generousWelfare.name }}</v-list-item-title>
+                <v-list-item-title v-text="enerousWelfare.name"></v-list-item-title>
             </v-list-item-content>
             </template>
         </v-list-item>
