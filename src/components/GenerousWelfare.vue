@@ -3,13 +3,14 @@
     <v-list-item-group>
       <template v-for="(generousWelfare, i) in generousWelfareArray"> 
         <v-divider :key="`divider-${i}`"></v-divider>
-        <v-list-item :key="`item-${i}`" :value="generousWelfare.id" @click="filter">
+        <v-list-item
+          :key="`item-${i}`" 
+          :value="generousWelfare.id">
             <template v-slot:default="{ active, toggle }">
             <v-list-item-action>
                 <v-checkbox
                 :input-value="active"
                 :true-value="generousWelfare.id" 
-                v-model="checked[i]"
                 @click="toggle">
                 </v-checkbox>
             </v-list-item-action>
