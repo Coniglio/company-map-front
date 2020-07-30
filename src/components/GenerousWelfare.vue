@@ -1,16 +1,18 @@
 <template>
   <v-list>
-    <v-list-item v-for="(generousWelfare, i) in generousWelfareArray" :key="generousWelfare.id" @click="filter">
-      <template>
-        <v-list-item-action>
-          <v-checkbox :value="generousWelfare.id" v-model="checked[i]"></v-checkbox>
-        </v-list-item-action>
+    <v-list-item-group>
+      <v-list-item v-for="(generousWelfare, i) in generousWelfareArray" :key="generousWelfare.id" @click="filter">
+        <template>
+          <v-list-item-action>
+            <v-checkbox :value="generousWelfare.id" v-model="checked[i]"></v-checkbox>
+            </v-list-item-action>
 
-        <v-list-item-content>
-          <v-list-item-title>{{ generousWelfare.name }}</v-list-item-title>
-        </v-list-item-content>
-      </template>
-    </v-list-item>
+          <v-list-item-content>
+            <v-list-item-title>{{ generousWelfare.name }}</v-list-item-title>
+          </v-list-item-content>
+        </template>
+        </v-list-item>
+      </v-list-item-group>
   </v-list>
 </template>
 
