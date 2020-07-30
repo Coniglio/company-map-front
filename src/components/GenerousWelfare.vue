@@ -1,7 +1,9 @@
 <template>
   <v-list shaped>
     <v-list-item-group>
-        <v-list-item v-for="(generousWelfare, i) in generousWelfareArray" :key="generousWelfare.id" @click="filter">
+      <template v-for="(generousWelfare, i) in generousWelfareArray"> 
+        <v-divider :key="`divider-${i}`"></v-divider>
+        <v-list-item :key="`item-${i}`" :value="generousWelfare.id" @click="filter">
             <template v-slot:default="{ active, toggle }">
             <v-list-item-action @click="toggle">
                 <v-checkbox
@@ -16,6 +18,7 @@
             </v-list-item-content>
             </template>
         </v-list-item>
+      </template>
     </v-list-item-group>
   </v-list>
 </template>
