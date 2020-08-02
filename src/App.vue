@@ -144,7 +144,8 @@ export default {
             name: company.name,
             visible: false,
             languages: company.languages,
-            alongs: company.alongs
+            alongs: company.alongs,
+            generousWelfares: company.generousWelfares
           });
         }
     })
