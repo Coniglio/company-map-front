@@ -21,7 +21,7 @@ const store = new Vuex.Store({
   state: {
     checkedLanguages: [],
     checkedAlongs: [],
-    checkedGenerousWelfare: [],
+    checkedGenerousWelfares: [],
   }
 });
 

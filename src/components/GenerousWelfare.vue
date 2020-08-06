@@ -1,28 +1,32 @@
 <template>
-  <v-list>
+  <v-card
+    elevation="24"
+    max-width="500"
+    class="mx-auto"
+  >
     <v-list-item-group multiple>
-      <template v-for="(generousWelfare, i) in generousWelfareArray"> 
-        <v-divider :key="`divider-${i}`"></v-divider>
-        <v-list-item
-          :key="`item-${i}`" 
-          :value="generousWelfare.id">
-            <template v-slot:default="{ active, toggle }">
-            <v-list-item-action>
-                <v-checkbox
-                :input-value="active"
-                :true-value="generousWelfare.id" 
-                @click="toggle">
-                </v-checkbox>
-            </v-list-item-action>
+      <v-virtual-scroll
+        :items="generousWelfareArray"
+        height="300"
+        item-height="70"
+        width="300"
+      >
+        <template v-slot="{ item }"> 
 
-            <v-list-item-content>
-                <v-list-item-title v-text="generousWelfare.name"></v-list-item-title>
-            </v-list-item-content>
-            </template>
-        </v-list-item>
-      </template>
+          <v-list-item>
+            <v-checkbox
+              :input-value="item.id"
+              :true-value="item.id"
+              @click="filter(item.id)"
+              :label="item.name"
+              v-model="checkboxState[item.id]"
+            >
+            </v-checkbox>
+          </v-list-item>
+        </template>
+      </v-virtual-scroll>
     </v-list-item-group>
-  </v-list>
+  </v-card>
 </template>
 
 <script>
@@ -30,12 +34,10 @@ import axios from 'axios'
 
 export default {
   name: 'generousWelfare',
-  data: () => {
-    return {
-      generousWelfareArray: [],
-      checked: [],
-    }
-  },
+  data: () => ({
+    generousWelfareArray: [],
+    checkboxState: {}
+  }),
   mounted() {
     const url = process.env.VUE_APP_API_SERVER + "/api/v1/generousWelfares"
     axios
@@ -44,37 +46,30 @@ export default {
         this.generousWelfareArray = response.data
 
         // チェックボックスの初期状態を生成
-        this.checked = Array.apply(null, Array(this.generousWelfareArray.length)).map(function () {return false})
-
-        for (const [index, generousWelfare] of this.generousWelfareArray.entries()) {
-          this.$store.state.checkedGenerousWelfare.push({id: generousWelfare.id, isChecked: this.checked[index]})
+        for (const generousWelfare of this.generousWelfareArray.entries()) {
+          this.checkboxState[generousWelfare.id] = false
+          this.$store.state.checkedGenerousWelfares.push({id: generousWelfare[1].id, isChecked: false})
         }
-      } )
+      })
   },
   methods: {
     /**
      * 福利厚生IDとチェック状態のマップを生成
      */
-    filter: function (event) {
+    filter: function (id) {
       // 福利厚生IDとチェック状態のマップを生成
       // TODO 仮実装
-      this.checkedArray = [] // チェクボックスを作り替えるけど、対象だけ書き換えた方がよいかも
       // 手動でチェック状態の反映が必要。チェックボックスとデータが同期していない。作りの問題な気がする
-      const generousWelfareId = Number(event.target.value)
-      const isChecked = event.target.checked
+      const isChecked = this.checkboxState[id]
+      console.log(id,isChecked)
 
       // 福利厚生
-      for (const [index, generousWelfare] of this.generousWelfareArray.entries()) {
-        
-        // 福利厚生チェックボックス
-        if (generousWelfare.id === generousWelfareId) {
-          this.checkedArray.push({id: generousWelfare.id, isChecked: isChecked})
-        } else {
-          this.checkedArray.push({id: generousWelfare.id, isChecked: this.checked[index]})
+      this.checkboxState[id] = isChecked
+      for (let generousWelfares of this.$store.state.checkedGenerousWelfares) {
+        if (generousWelfares.id == id) {
+          generousWelfares.isChecked = this.checkboxState[id]
         }
       }
-
-      this.$store.state.checkedGenerousWelfare = this.checkedArray
 
       // 親コンポーネントに入力イベント通知
       this.$emit('input')

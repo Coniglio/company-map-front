@@ -15,7 +15,7 @@
     "load-google-maps-api": "^2.0.1",
     "vue": "^2.6.10",
     "vue2-google-maps": "^0.10.7",
-    "vuetify": "^2.3.6",
+    "vuetify": "^2.3.7",
     "vuex": "^3.5.1",
     "yarn": "^1.22.4"
   },

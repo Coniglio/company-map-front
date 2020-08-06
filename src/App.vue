@@ -44,19 +44,9 @@
           <template v-slot:activator="{ on }">
             <v-btn v-on="on">福利厚生</v-btn>
           </template>
-          <generousWelfare :checkedGenerousWelfareArray="checkedArray" @input="displayMarkers" />
+          <generousWelfares :checkedGenerousWelfareArray="checkedArray" @input="displayMarkers" />
         </v-menu>
 
-        <v-menu offset-y :close-on-content-click=false>
-          <template v-slot:activator="{ on }">
-            <v-btn v-on="on">年収</v-btn>
-          </template>
-          <v-list>
-            <v-list-item>
-              <v-list-item-title>test</v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
       </template>
     </v-app-bar>
 
@@ -105,7 +95,7 @@
 <script>
 import Languages from './components/Language'
 import Alongs from './components/Along'
-import GenerousWelfare from './components/GenerousWelfare'
+import GenerousWelfares from './components/GenerousWelfare'
 
 import axios from 'axios'
 
@@ -114,7 +104,7 @@ export default {
   components: {
     Languages,
     Alongs,
-    GenerousWelfare
+    GenerousWelfares
   },
   data() {
     return {
@@ -161,14 +151,13 @@ export default {
      * 
      */
     displayMarkers() {
-      for ( let marker of this.markers) {
+      for ( const marker of this.markers) {
         marker.visible = false
 
         // 企業が採用している言語
-        lang: for ( let language of marker.languages) {
-
+        lang: for ( const language of marker.languages) {
           // 言語チェックボックス
-          for (let checked of this.$store.state.checkedLanguages) {
+          for (const checked of this.$store.state.checkedLanguages) {
             // チェックした言語のIDと企業言語IDが一致 & チェックオン
             if (checked.id === language.id && checked.isChecked) {
               marker.visible = true
@@ -178,11 +167,10 @@ export default {
         }
 
         // 企業が最寄りの沿線
-        along: for ( let along of marker.alongs) {
-
-          // 言語チェックボックス
-          for (let checked of this.$store.state.checkedAlongs) {
-            // チェックした言語のIDと企業言語IDが一致 & チェックオン
+        along: for ( const along of marker.alongs) {
+          // 沿線チェックボックス
+          for (const checked of this.$store.state.checkedAlongs) {
+            // チェックした沿線のIDと企業言語IDが一致 & チェックオン
             if (checked.id === along.id && checked.isChecked) {
               marker.visible = true
               break along
@@ -191,6 +179,18 @@ export default {
         }
 
         // 企業の福利厚生
+        if (marker.generousWelfares !== []) {
+          generousWelfare: for (const generousWelfare of marker.generousWelfares) {
+            // 福利厚生チェックボックス
+            for (const checked of this.$store.state.checkedGenerousWelfares) {
+              // チェックした福利厚生のIDと企業福利厚生IDが一致 & チェックオン
+              if (checked.id === generousWelfare.id && checked.isChecked) {
+                marker.visible = true
+                break generousWelfare
+              }
+            }
+          }
+        }
       }
     },
   }
