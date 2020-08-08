@@ -20,6 +20,12 @@
 
         <v-list>
           <v-list-item>
+            <v-btn
+                dark
+                icon
+              >
+              <v-icon color="black">{{ icons.mdiLogoutVariant }}</v-icon>
+            </v-btn>
             <v-list-item-title>ログアウト</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -100,7 +106,8 @@ import GenerousWelfares from './components/GenerousWelfare'
 import axios from 'axios'
 
 import {
-  mdiAccount
+  mdiAccount,
+  mdiLogoutVariant
 } from '@mdi/js'
 
 export default {
@@ -123,7 +130,8 @@ export default {
       infoWinOpen: false,
       companyName: null,
       icons: {
-        mdiAccount
+        mdiAccount,
+        mdiLogoutVariant
       }
     };
   },
