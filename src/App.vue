@@ -24,6 +24,26 @@
                 dark
                 icon
               >
+              <v-icon color="black">{{ icons.mdiEmail }}</v-icon>
+            </v-btn>
+            <v-list-item-title>メールアドレス変更</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-btn
+                dark
+                icon
+              >
+              <v-icon color="black">{{ icons.mdiLockReset }}</v-icon>
+            </v-btn>
+            <v-list-item-title>パスワード変更</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-btn
+                dark
+                icon
+              >
               <v-icon color="black">{{ icons.mdiLogoutVariant }}</v-icon>
             </v-btn>
             <v-list-item-title>ログアウト</v-list-item-title>
@@ -108,7 +128,9 @@ import axios from 'axios'
 import {
   mdiAccount,
   mdiLogoutVariant,
-  mdiMapMarker
+  mdiMapMarker,
+  mdiLockReset,
+  mdiEmail
 } from '@mdi/js'
 
 export default {
@@ -133,7 +155,9 @@ export default {
       icons: {
         mdiAccount,
         mdiLogoutVariant,
-        mdiMapMarker
+        mdiMapMarker,
+        mdiLockReset,
+        mdiEmail
       }
     };
   },
