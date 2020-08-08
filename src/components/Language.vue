@@ -49,8 +49,8 @@ export default {
 
         // チェックボックスの初期状態を生成
         for (const language of this.languageArray.entries()) {
-          this.checkboxState[generousWelfare[1].id] = false
-          this.$store.state.checkedGenerousWelfares.push({id: generousWelfare[1].id, isChecked: false})
+          this.checkboxState[language[1].id] = false
+          this.$store.state.checkedLanguages.push({id: language[1].id, isChecked: false})
         }
       })
   },
@@ -63,7 +63,7 @@ export default {
       this.checkboxState[id] = isChecked
 
       // 言語
-      for (let language of this.$store.state.checkedLanguages) {
+      for (const language of this.$store.state.checkedLanguages) {
         if (language.id == id) {
           language.isChecked = this.checkboxState[id]
         }
