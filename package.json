@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@google/maps": "^1.1.0",
+    "@mdi/js": "^5.4.55",
     "axios": "^0.19.2",
     "core-js": "^3.4.4",
     "google-maps-api-loader": "^1.1.1",
@@ -20,6 +21,7 @@
     "yarn": "^1.22.4"
   },
   "devDependencies": {
+    "@mdi/font": "^5.4.55",
     "@vue/cli-plugin-babel": "^4.1.0",
     "@vue/cli-plugin-eslint": "^4.1.0",
     "@vue/cli-service": "^4.4.6",

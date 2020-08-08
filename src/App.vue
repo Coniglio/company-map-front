@@ -14,13 +14,13 @@
             v-bind="attrs"
             v-on="on"
           >
-            <v-icon>mdi-dots-vertical</v-icon>
+            <v-icon color="white">{{ icons.mdiAccount }}</v-icon>
           </v-btn>
         </template> 
 
         <v-list>
           <v-list-item>
-            <v-list-item-title>ユーザーメニュー的な感じ</v-list-item-title>
+            <v-list-item-title>ログアウト</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -99,6 +99,10 @@ import GenerousWelfares from './components/GenerousWelfare'
 
 import axios from 'axios'
 
+import {
+  mdiAccount
+} from '@mdi/js'
+
 export default {
   name: "app",
   components: {
@@ -118,6 +122,9 @@ export default {
       infoWindowPos: null,
       infoWinOpen: false,
       companyName: null,
+      icons: {
+        mdiAccount
+      }
     };
   },
   created() {
