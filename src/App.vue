@@ -1,8 +1,7 @@
 <template>
   <v-app id="app">
     <v-app-bar fixed=true class="light-blue lighten-3">
-      <v-icon color="white">{{ icons.mdiMapMarker }}</v-icon>
-      <v-col class="text-left">test</v-col>
+      <img src="logo.png"/>
 
       <v-spacer></v-spacer>
 
@@ -112,7 +111,7 @@
     </v-main>
 
     <v-footer fabsolute :padless=true>
-      <v-col cols="12" class="text-right">&copy; {{ new Date().getFullYear() }}</v-col>
+      <v-col cols="12" class="text-right">&copy; {{ new Date().getFullYear() }} étoile</v-col>
     </v-footer>
       
   </v-app>
