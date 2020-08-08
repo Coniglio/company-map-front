@@ -34,21 +34,21 @@
       <template v-slot:extension>
         <v-menu offset-y :close-on-content-click=false>
           <template v-slot:activator="{ on }">
-            <v-btn v-on="on">言語</v-btn>
+            <v-btn class="filter" v-on="on">言語</v-btn>
           </template>
           <languages :checkedLanguagesArray="checkedArray" @input="displayMarkers" />
         </v-menu>
 
         <v-menu offset-y :close-on-content-click=false>
           <template v-slot:activator="{ on }">
-            <v-btn v-on="on">沿線</v-btn>
+            <v-btn class="filter" v-on="on">沿線</v-btn>
           </template>
           <alongs :checkedAlongsArray="checkedArray" @input="displayMarkers" />
         </v-menu>
 
         <v-menu offset-y :close-on-content-click=false>
           <template v-slot:activator="{ on }">
-            <v-btn v-on="on">福利厚生</v-btn>
+            <v-btn class="filter" v-on="on">福利厚生</v-btn>
           </template>
           <generousWelfares :checkedGenerousWelfareArray="checkedArray" @input="displayMarkers" />
         </v-menu>
@@ -215,5 +215,9 @@ export default {
 <style scoped>
   v-footer {
     height: 10px;
+  }
+
+  .filter {
+    margin-right: 10px;
   }
 </style>
