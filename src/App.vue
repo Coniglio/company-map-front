@@ -1,7 +1,7 @@
 <template>
   <v-app id="app">
     <v-app-bar fixed=true class="light-blue lighten-3">
-      <v-img width="20px" height="10px" src="https://cdn.worldvectorlogo.com/logos/vuetify.svg"></v-img>
+      <v-icon color="white">{{ icons.mdiMapMarker }}</v-icon>
       <v-col class="text-left">test</v-col>
 
       <v-spacer></v-spacer>
@@ -107,7 +107,8 @@ import axios from 'axios'
 
 import {
   mdiAccount,
-  mdiLogoutVariant
+  mdiLogoutVariant,
+  mdiMapMarker
 } from '@mdi/js'
 
 export default {
@@ -131,7 +132,8 @@ export default {
       companyName: null,
       icons: {
         mdiAccount,
-        mdiLogoutVariant
+        mdiLogoutVariant,
+        mdiMapMarker
       }
     };
   },
