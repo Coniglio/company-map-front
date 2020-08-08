@@ -47,7 +47,7 @@ export default {
 
         // チェックボックスの初期状態を生成
         for (const generousWelfare of this.generousWelfareArray.entries()) {
-          this.checkboxState[generousWelfare.id] = false
+          this.checkboxState[generousWelfare[1].id] = false
           this.$store.state.checkedGenerousWelfares.push({id: generousWelfare[1].id, isChecked: false})
         }
       })
@@ -61,7 +61,6 @@ export default {
       // TODO 仮実装
       // 手動でチェック状態の反映が必要。チェックボックスとデータが同期していない。作りの問題な気がする
       const isChecked = this.checkboxState[id]
-      console.log(id,isChecked)
 
       // 福利厚生
       this.checkboxState[id] = isChecked

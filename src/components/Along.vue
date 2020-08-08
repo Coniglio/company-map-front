@@ -1,10 +1,32 @@
 <template>
-  <v-list>
-    <v-list-item v-for="(along, i) in alongArray" :key="along.id" @click="filter">
-      <input type="checkbox" checked="checked" :value="along.id" v-model="checked[i]">
-      <v-list-item-title>{{ along.name }}</v-list-item-title>
-    </v-list-item>
-  </v-list>
+  <v-card
+    elevation="24"
+    max-width="500"
+    class="mx-auto"
+  >
+    <v-list-item-group multiple>
+      <v-virtual-scroll
+        :items="alongArray"
+        height="300"
+        item-height="70"
+        width="300"
+      >
+        <template v-slot="{ item }"> 
+
+          <v-list-item>
+            <v-checkbox
+              :input-value="item.id"
+              :true-value="item.id"
+              @click="filter(item.id)"
+              :label="item.name"
+              v-model="checkboxState[item.id]"
+            >
+            </v-checkbox>
+          </v-list-item>
+        </template>
+      </v-virtual-scroll>
+    </v-list-item-group>
+  </v-card>
 </template>
 
 <script>
@@ -14,8 +36,8 @@ export default {
   name: 'along',
   data: () => {
     return {
-      alongArray: null,
-      checked: null,
+      alongArray: [],
+      checkboxState: {},
     }
   },
   mounted() {
@@ -26,38 +48,29 @@ export default {
         this.alongArray = response.data
 
         // チェックボックスの初期状態を生成
-        this.checked = Array.apply(null, Array(this.alongArray.length)).map(function () {return false})
-
-        for (const [index, along] of this.alongArray.entries()) {
-          this.$store.state.checkedAlongs.push({id: along.id, isChecked: this.checked[index]})
+        for (const along of this.alongArray.entries()) {
+          this.checkboxState[along[1].id] = false
+          this.$store.state.checkedAlongs.push({id: along[1].id, isChecked: false})
         }
-      } )
+      })
     },
     methods: {
       /**
-       * 言語IDとチェック状態のマップを生成
+       * 沿線IDとチェック状態のマップを生成
        */
-      filter: function (event) {
-        this.checkedArray = [] // チェクボックスを作り替えるけど、対象だけ書き換えた方がよいかも
-        // 手動でチェック状態の反映が必要。チェックボックスとデータが同期していない。作りの問題な気がする
-        const alongId = Number(event.target.value)
-        const isChecked = event.target.checked
+      filter: function (id) {
+        const isChecked = this.checkboxState[id]
 
-        // 言語
-        for (const [index, along] of this.alongArray.entries()) {
-          
-          // 言語チェックボックス
-          if (along.id === alongId) {
-            this.checkedArray.push({id: along.id, isChecked: isChecked})
-          } else {
-            this.checkedArray.push({id: along.id, isChecked: this.checked[index]})
+        // 沿線
+        this.checkboxState[id] = isChecked
+        for (let along of this.$store.state.checkedAlongs) {
+          if (along.id == id) {
+            along.isChecked = this.checkboxState[id]
           }
         }
 
-        this.$store.state.checkedAlongs = this.checkedArray
-
         // 親コンポーネントに入力イベント通知
-        this.$emit('input')
+        this.$emit('input') 
       }
     }
 }
