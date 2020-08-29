@@ -97,7 +97,7 @@
           {{companyName}}
         </GmapInfoWindow>
         <div
-          v-for="(m, index) in this.$store.state.markersDisplay"
+          v-for="(m, index) in this.markers"
           :key="index"
         >
         <GmapMarker
@@ -141,7 +141,7 @@ export default {
   },
   data() {
     return {
-      markersDisplay: null,
+      markers: [],
       infoOptions: {
         pixelOffset: {
           width: 0,
@@ -166,11 +166,12 @@ export default {
       .get(url)
       .then(response => {
         for (let company of response.data ) {
-          this.markersDisplay.push({
+          this.markers.push({
             position: {
               lat: company.latlng.lat,
               lng: company.latlng.lang
             },
+            id: company.id,
             name: company.name,
             visible: false,
             languages: company.languages,
@@ -191,24 +192,56 @@ export default {
      * 
      */
     displayMarkers() {
+      let languages = []
+      for (const language of this.$store.state.checkedLanguages) {
+        if (language.isChecked) {
+          languages.push(language.id)
+        }
+      }
+
+      let alongs = []
+      for (const along of this.$store.state.checkedAlongs) {
+        if (along.isChecked) {
+          alongs.push(along.id)
+        }
+      }
+
+      let generousWelfares = []
+      for (const generousWelfare of this.$store.state.checkedGenerousWelfares) {
+        if (generousWelfare.isChecked) {
+          generousWelfares.push(generousWelfare.id)
+        }
+      }
+
+      // チェック無しの場合、全てのマーカー非表示
+      if (!languages.length && !alongs.length && !generousWelfares.length) {
+        for (const marker of this.markers) {
+            marker.visible = false
+        }
+        return
+      }
+
+      // JSON.stringify()
 
       // 表示する企業を取得
       const url = process.env.VUE_APP_API_SERVER + "/api/v1/displays"
       axios
         .get(url, {
           params: {
-            languages: JSON.stringify(this.$store.state.checkedLanguages),
-            alongs: JSON.stringify(this.$store.state.checkedAlongs),
-            generousWelfares: JSON.stringify(this.$store.state.checkedGenerousWelfares)
+            languages: languages.length ? languages.join(',') : languages,
+            alongs: alongs.length ? alongs.join(',') : alongs,
+            generousWelfares: generousWelfares.length ? generousWelfares.join(',') : generousWelfares
           }
         })
         .then(response => {
           // 取得結果の企業を表示/非表示
           let displays = response.data
           for (const marker of this.markers) {
+            marker.visible = false
             for (const display of displays) {
-              if (marker.id === display.id) {
+              if (marker.id === display.companyId) {
                 marker.visible = true
+                break
               }
             }
           }
