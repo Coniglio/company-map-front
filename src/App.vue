@@ -97,7 +97,7 @@
           {{companyName}}
         </GmapInfoWindow>
         <div
-          v-for="(m, index) in markers"
+          v-for="(m, index) in this.$store.state.markersDisplay"
           :key="index"
         >
         <GmapMarker
@@ -141,7 +141,7 @@ export default {
   },
   data() {
     return {
-      markers: [],
+      markersDisplay: null,
       infoOptions: {
         pixelOffset: {
           width: 0,
@@ -164,9 +164,9 @@ export default {
     const url = process.env.VUE_APP_API_SERVER + "/api/v1/companymaps"
     axios
       .get(url)
-      .then( response => {
-        for ( let company of response.data ) {
-          this.markers.push({
+      .then(response => {
+        for (let company of response.data ) {
+          this.markersDisplay.push({
             position: {
               lat: company.latlng.lat,
               lng: company.latlng.lang
@@ -187,54 +187,35 @@ export default {
       this.infoWinOpen = true
     },
     /**
-     * 選択状態に応じたマーカーをマップ上に表示します
+     * 選択状態に応じたマーカーをマップ上にAND条件で表示します
      * 
      */
     displayMarkers() {
-      for ( const marker of this.markers) {
-        marker.visible = false
 
-        // 企業が採用している言語
-        lang: for ( const language of marker.languages) {
-          // 言語チェックボックス
-          for (const checked of this.$store.state.checkedLanguages) {
-            // チェックした言語のIDと企業言語IDが一致 & チェックオン
-            if (checked.id === language.id && checked.isChecked) {
-              marker.visible = true
-              break lang
-            }
+      // 表示する企業を取得
+      const url = process.env.VUE_APP_API_SERVER + "/api/v1/displays"
+      axios
+        .get(url, {
+          params: {
+            languages: JSON.stringify(this.$store.state.checkedLanguages),
+            alongs: JSON.stringify(this.$store.state.checkedAlongs),
+            generousWelfares: JSON.stringify(this.$store.state.checkedGenerousWelfares)
           }
-        }
-
-        // 企業が最寄りの沿線
-        along: for ( const along of marker.alongs) {
-          // 沿線チェックボックス
-          for (const checked of this.$store.state.checkedAlongs) {
-            // チェックした沿線のIDと企業言語IDが一致 & チェックオン
-            if (checked.id === along.id && checked.isChecked) {
-              marker.visible = true
-              break along
-            }
-          }
-        }
-
-        // 企業の福利厚生
-        if (marker.generousWelfares !== []) {
-          generousWelfare: for (const generousWelfare of marker.generousWelfares) {
-            // 福利厚生チェックボックス
-            for (const checked of this.$store.state.checkedGenerousWelfares) {
-              // チェックした福利厚生のIDと企業福利厚生IDが一致 & チェックオン
-              if (checked.id === generousWelfare.id && checked.isChecked) {
+        })
+        .then(response => {
+          // 取得結果の企業を表示/非表示
+          let displays = response.data
+          for (const marker of this.markers) {
+            for (const display of displays) {
+              if (marker.id === display.id) {
                 marker.visible = true
-                break generousWelfare
               }
             }
           }
-        }
-      }
-    },
-  }
-};
+      })
+    }
+  },
+}
 </script>
 
 <style scoped>
